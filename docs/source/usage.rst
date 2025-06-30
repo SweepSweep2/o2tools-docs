@@ -121,7 +121,7 @@ Continue
 
 You can follow tutorials on how to create O2Tools programs. Here are some that are good for beginners:
 
-- tut1
+- :doc:'tutorial1.rst'
 - tut2
 - tut3
 
