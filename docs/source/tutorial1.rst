@@ -7,7 +7,7 @@ The program will look something like this:
 
 .. only:: html
 
-   .. figure:: https://github.com/SweepSweep2/o2tools-docs/blob/main/docs/source/tutorial1/tut1gif1.gif
+   .. figure:: tutorial1/tut1gif1.gif
 
       Final product of the program
 
