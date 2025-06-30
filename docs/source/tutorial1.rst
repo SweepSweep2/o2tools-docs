@@ -1,5 +1,5 @@
 Tutorial 1 - OJN Header Changer
--------------------------------
+===============================
 
 In this tutorial, we will write a simple program that will ask for an OJN file, ask for what we want to change with the header, and edit the file with these changes.
 
