@@ -3,14 +3,6 @@ Tutorial 1 - OJN Header Changer
 
 In this tutorial, we will write a simple program that will ask for an OJN file, ask for what we want to change with the header, and edit the file with these changes.
 
-The program will look something like this:
-
-.. only:: html
-
-   .. figure:: tutorial1/tut1gif1.gif
-
-      Final product of the program
-
 General Layout
 --------------
 
