@@ -5,7 +5,11 @@ In this tutorial, we will write a simple program that will ask for an OJN file, 
 
 The program will look something like this:
 
-.. image:: https://github.com/SweepSweep2/o2tools-docs/blob/main/docs/source/tutorial1/tut1gif1.gif
+.. only:: html
+
+   .. figure:: https://github.com/SweepSweep2/o2tools-docs/blob/main/docs/source/tutorial1/tut1gif1.gif
+
+      Final product of the program
 
 General Layout
 --------------
@@ -28,7 +32,7 @@ Let's begin making the program.
 
 Here is the structure of the program (no logic added):
 
-.. codeblock:: python
+.. code-block:: python
 
   import o2tools
 
@@ -45,13 +49,15 @@ We will go through this code one by one so you understand everything.
 
 ====
 
-``ojn_file = o2tools.ojn.OJN(input("Enter your OJN file: "))``
+.. code-block:: python
+
+  ojn_file = o2tools.ojn.OJN(input("Enter your OJN file: "))
 
 Here, we ask the user for the path to the OJN file and open it. ``OJN()``'s only parameter is the file path, which is why we can feed the input directly into ``OJN()``.
 
 ====
 
-.. codeblock:: python
+.. code-block:: python
 
   property = input("Enter the name of the value you want to change: ")
   new_value = input("Enter the new value: ")
@@ -68,7 +74,7 @@ Changing the Property
 
 Next, we need to change the property. We could go through a lot of if statements to see what the user put, but that is lazy and inefficient. Instead, we can use the ``setattr()`` function.
 
-.. codeblock:: python
+.. code-block:: python
 
   import o2tools
 
@@ -89,7 +95,7 @@ We only added one line, ``setattr(ojn_file.header, new_property, new_value)``. T
 
 To test if this is working, put this code below the ``setattr()`` function:
 
-.. codeblock:: python
+.. code-block:: python
 
   print(getattr(ojn_file.header, new_property))
 
@@ -101,7 +107,7 @@ To test if this is working, put this code below the ``setattr()`` function:
 
 You should be seeing something like this in the console:
 
-.. codeblock:: text
+.. code-block:: text
 
   Enter your OJN file: o2ma105.ojn
   Enter the name of the value you want to change: song_id
@@ -123,7 +129,7 @@ You can either call ``o2tools.ojn.make_file()``, or ``o2tools.make_file()``. Bot
 
 Let's add this to the code:
 
-.. codeblock:: python
+.. code-block:: python
 
   import o2tools
     
@@ -139,7 +145,9 @@ Let's add this to the code:
 
 ====
 
-``o2tools.ojn.make_file(ojn_file.ojn_file_path, ojn_file.header, ojn_file.note_data)``
+.. code-block:: python
+
+  o2tools.ojn.make_file(ojn_file.ojn_file_path, ojn_file.header, ojn_file.note_data)
 
 This function makes a new file with the name in the first parameter (``ojn_file.ojn_file_path``, which is what the user specified in the first input statement).
 
@@ -158,7 +166,7 @@ Error Checking
 
 Here is the full, complete code for this program:
 
-.. codeblock:: python
+.. code-block:: python
 
   import o2tools
   
@@ -182,7 +190,7 @@ Here is the full, complete code for this program:
 
 ====
 
-.. codeblock:: python
+.. code-block:: python
 
   try:
       new_value = int(new_value)
@@ -196,7 +204,7 @@ This looks a bit hard to explain, so I think it's better if we step through to s
 
 ====
 
-.. codeblock:: python
+.. code-block:: python
 
   try:
       new_value = int(new_value)
@@ -205,7 +213,7 @@ We try to convert the value the user inputted into an integer.
 
 ====
 
-.. codeblock:: python
+.. code-block:: python
 
   except ValueError:
       try:
@@ -215,7 +223,7 @@ If it fails, try to convert it into a float.
 
 ====
 
-.. codeblock:: python
+.. code-block:: python
 
   except ValueError:
       new_value = new_value.encode("ISO-8859-1")
