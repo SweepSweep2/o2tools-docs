@@ -6,7 +6,7 @@ https://o2tools.readthedocs.io/en/stable/tutorial
 
 Contributing
 ============
-You can contribute by translating the documentation into different languages.
+You can contribute by translating the documentation into different languages, and filling in unknown data about specific file formats.
 
 +----------+------------+
 | Language | Translated |
