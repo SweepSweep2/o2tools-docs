@@ -214,7 +214,8 @@ Source: https://open2jam.wordpress.com/the-ojn-documentation
 
 ----
 
-Parameters:
+Parameters
+^^^^
 
 * ``file_path (str)``: The path to the file that the function will create.
 * ``header (OjnHeader)``: The header in the form of an ``OjnHeader`` object.
@@ -238,7 +239,8 @@ Source: https://open2jam.wordpress.com/the-ojn-documentation
 
 ----
 
-Parameters:
+Parameters
+^^^^
 
 * ``ojn_file (bytes)``: The raw bytes of the OJN file.
 
