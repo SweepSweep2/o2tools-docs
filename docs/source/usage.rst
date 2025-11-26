@@ -12,7 +12,7 @@ To use O2Tools, either build it, or install it using pip:
 
    (.venv) $ pip install o2tools
 
-If you want to build it, follow the instructions here.
+If you want to build it, follow the instructions :here:`building`.
 
 Using O2Tools
 -------------
@@ -25,7 +25,8 @@ For example, if you want to get the OJM tools, you must use something along thes
 
    import o2tools
 
-   ojm_file = o2tools.ojm.OJM("o2ma200.ojm")
+   with open("o2ma200.ojm", "rb") as f:
+       ojm_file = o2tools.ojm.OJM(f.read())
 
 Or, if you want only a certain file type in your code you can use something along these lines:
 
@@ -33,28 +34,22 @@ Or, if you want only a certain file type in your code you can use something alon
 
    from o2tools import ojm
 
-   ojm_file = ojm.OJM("o2ma200.ojm")
+   with open("o2ma200.ojm", "rb") as f:
+       ojm_file = ojm.OJM(f.read())
 
-Getting the Files
------------------
-
-There aren't really good ways to get the files from O2Jam, but there are some websites I would recommend you use:
-
-- https://nnty.fun/downloads/game/o2jam/MEGA/
-
-All the websites mentioned are 100% safe to use.
-
-This package is dependent on O2Jam Client 1.8 and O2Jam Server 1.8, other versions of O2Jam may not work. (we are still adding support!)
+Below are some examples on how you would read certain data types.
 
 OJN Files
 ---------
 
-To parse OJN files, make a new ``OJN()`` class, with the OJN file path as a parameter. Example:
+To parse OJN files, make a new ``OJN()`` class, with the OJN data as a parameter. Example:
 
 .. code-block:: python
 
    import o2tools
-   ojn_file = o2tools.ojn.OJN("o2ma100.ojn")
+
+   with open("o2ma100.ojn", "rb") as f:
+       ojn_file = o2tools.ojn.OJN(f.read())
 
 Now, to get data from it, in this case the note data, we just get a variable from it:
 
@@ -66,7 +61,6 @@ This won't return something like a list, but instead an OjnNoteData object, whic
 
 .. code-block:: python
 
-   @dataclasses.dataclass
    class OjnNoteData:
       note_data_easy: dict
       note_data_normal: dict
@@ -74,16 +68,10 @@ This won't return something like a list, but instead an OjnNoteData object, whic
 
 There are much more classes just like this one, which you can check out in the OJN, OJM, etc. sections.
 
-====
-
-If you want the full documentation on the OJN section of O2Tools, check out the O2Tools OJN Documentation.
-
-If you want the full documentation on how OJN files work, check out the OJN Documentation.
-
 OJM Files
 ---------
 
-To parse OJM files, make a new ``OJM()`` class, with the OJM file path as a parameter. Example:
+To parse OJM files, make a new ``OJM()`` class, with the OJM data as a parameter. Example:
 
 .. code-block:: python
 
@@ -97,6 +85,12 @@ To extract the data from it, in this case the header, we get another variable fr
    header = ojm_file.header
 
 This will give us an OjmHeader object.
+
+----
+
+If you want to see how to parse a certain data type, and see what you can do with it, check out it's appropriate documentation.
+
+The parsing should be almost the same as these examples, however they have different data and functions you can use.
 
 Making New Files
 ----------------
@@ -116,6 +110,8 @@ To make a new OJN file, you can call the function ``make_file()`` like this:
 
 This will make a new OJN file called ``o2ma200.ojn`` with the exact same data as ``o2ma150.ojn``.
 
+This also applies to all other data types except for OJM/OMC type OJM files. (M30 is accepted)
+
 Continue
 --------
 
@@ -124,5 +120,3 @@ You can follow tutorials on how to create O2Tools programs. Here are some that a
 - :doc:'tutorial1.rst'
 - tut2
 - tut3
-
-You can also read the documentation on how these file formats work here.

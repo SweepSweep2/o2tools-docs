@@ -18,13 +18,12 @@ O2Tools has the following features:
 
 To see how to install and use O2Tools, go to the Usage section.
 
-To see the O2Jam file format documentation, go the the Files section.
-
 Contents
 --------
 
 .. toctree::
 
    Home <self>
+   building
    usage
    tutorial1
