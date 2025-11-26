@@ -10,7 +10,7 @@ O2Tools has the following features:
 
 - Readable OJN Note Sections
 - OJM Sound Extraction (both M30 and OMC)
-- Highly Documentated
+- Highly Documented
 - Easy to Use
 - Fully Object Orientated
 
