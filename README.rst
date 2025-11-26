@@ -1,3 +1,5 @@
+The documentation is still a work in progress!
+
 O2Tools Documentation
 =====================
 Contains the documentation for O2Tools and all the O2Jam file formats.
