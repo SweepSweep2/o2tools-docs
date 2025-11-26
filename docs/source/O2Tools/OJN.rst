@@ -7,7 +7,7 @@ Sources:
 
 * https://open2jam.wordpress.com/the-ojn-documentation
 
-``class NoteEvent``
+``class NoteEvent()``
 ~~~~
 
 The NoteEvent class.
@@ -25,6 +25,8 @@ Parameters
  * 2 = start of long note,
  * 3 = end of long note,
  * 4 = OGG sample trigger.
+
+----
 
 ``class PackageHeader()``
 ~~~~
@@ -49,6 +51,8 @@ Parameters
  * 8 = note on 7th lane
  * 9 and onwards - autoplay sample
 * ``event_count (int)``: The number of events inside this package.
+
+----
 
 ``class OjnNoteData()``
 ~~~~
@@ -76,6 +80,7 @@ Parameters
 * ``note_data_normal (dict)``: Note data for the medium difficulty
 * ``note_data_hard (dict)``: Note data for the hard difficulty
 
+----
 
 ``class OjnHeader()``
 ~~~~
@@ -124,6 +129,8 @@ Parameters
 * ``normal_note_offset (int)``: The offset (in bytes) of the note section for the medium difficulty.
 * ``hard_note_offset(int)``: The offset (in bytes) of the note section for the hard difficulty.
 * ``cover_offset (int)``: The offset (in bytes) of the cover image.
+
+----
 
 ``class OJN()``
 ~~~~
@@ -209,11 +216,11 @@ Source: https://open2jam.wordpress.com/the-ojn-documentation
 
 Parameters:
 
-:file_path (str): The path to the file that the function will create.
-:header (OjnHeader): The header in the form of an ``OjnHeader`` object.
-:notes (OjnNoteData): The notes in the form of an ``OjnNoteData`` object.
-:cover (bytes): The JPG cover of the OJN.
-:thumbnail (bytes): The 8x8 BMP thumbnail of the OJN.
+* ``file_path (str)``: The path to the file that the function will create.
+* ``header (OjnHeader)``: The header in the form of an ``OjnHeader`` object.
+* ``notes (OjnNoteData)``: The notes in the form of an ``OjnNoteData`` object.
+* ``cover (bytes)``: The JPG cover of the OJN.
+* ``thumbnail (bytes)``: The 8x8 BMP thumbnail of the OJN.
 
 ----
 

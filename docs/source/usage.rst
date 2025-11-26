@@ -12,7 +12,7 @@ To use O2Tools, either build it, or install it using pip:
 
    (.venv) $ pip install o2tools
 
-If you want to build it, follow the instructions :here:`building`.
+If you want to build it, follow the instructions for building.
 
 Using O2Tools
 -------------
@@ -68,29 +68,11 @@ This won't return something like a list, but instead an OjnNoteData object, whic
 
 There are much more classes just like this one, which you can check out in the OJN, OJM, etc. sections.
 
-OJM Files
----------
-
-To parse OJM files, make a new ``OJM()`` class, with the OJM data as a parameter. Example:
-
-.. code-block:: python
-
-   import o2tools
-   ojm_file = o2tools.ojm.OJM("o2ma250.ojm")
-
-To extract the data from it, in this case the header, we get another variable from it:
-
-.. code-block:: python
-
-   header = ojm_file.header
-
-This will give us an OjmHeader object.
-
 ----
 
 If you want to see how to parse a certain data type, and see what you can do with it, check out it's appropriate documentation.
 
-The parsing should be almost the same as these examples, however they have different data and functions you can use.
+The parsing should be almost the same as this example, however they have different data and functions you can use.
 
 Making New Files
 ----------------
@@ -105,8 +87,9 @@ To make a new OJN file, you can call the function ``make_file()`` like this:
 
    import o2tools
 
-   ojn_file = ojn.OJN("o2ma150.ojn")
-   new_ojn_file = ojn.make_file("o2ma200.ojn", ojn_file.header, ojn_file.note_data)
+   with open("o2ma150.ojn", "rb") as f:
+       ojn_file = ojn.OJN(f.read())
+       new_ojn_file = ojn.make_file("o2ma200.ojn", ojn_file.header, ojn_file.note_data)
 
 This will make a new OJN file called ``o2ma200.ojn`` with the exact same data as ``o2ma150.ojn``.
 
