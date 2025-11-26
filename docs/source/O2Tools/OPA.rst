@@ -23,6 +23,7 @@ Parameters
 ----
 
 ``class OpaFile()``
+~~~~
 
 The OpaFile class.
 

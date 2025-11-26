@@ -21,6 +21,7 @@ Parameters
 ----
 
 ``class OpiFile()``
+~~~~
 
 The OpiFile class.
 
