@@ -27,5 +27,5 @@ Contents
    Home <self>
    building
    usage
-   O2Tools/index
+   O2Tools/OJN
    tutorial1
