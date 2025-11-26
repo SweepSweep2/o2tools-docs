@@ -22,8 +22,10 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 2
 
    Home <self>
    building
    usage
+   O2Tools/index
    tutorial1
