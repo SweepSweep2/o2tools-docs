@@ -11,7 +11,7 @@ Let's make the general layout of this program.
 We want the program to do the following:
 
 - Ask the user for the file
-- Open up the file
+- Open the file
 - Ask the user for the property they want to change
 - Ask the user for the value they want to set it to
 - Get the header of the current file and replace the property with the value the user specified
@@ -28,14 +28,17 @@ Here is the structure of the program (no logic added):
 
   import o2tools
 
-  ojn_file = o2tools.ojn.OJN(input("Enter your OJN file: "))
-  property = input("Enter the name of the value you want to change: ")
-  new_value = input("Enter the new value: ")
-  print("Changing...")
+  file_path = input("Enter the path of your OJN file: ")
 
-  # change the ojn here
+  with open(file_path, "rb") as f:
+      ojn_file = o2tools.ojn.OJN(f.read())
+      property = input("Enter the name of the value you want to change: ")
+      new_value = input("Enter the new value: ")
+      print("Changing...")
 
-  print("Changed!")
+      # change the ojn here
+
+      print("Changed!")
 
 We will go through this code one by one so you understand everything.
 
@@ -43,9 +46,10 @@ We will go through this code one by one so you understand everything.
 
 .. code-block:: python
 
-  ojn_file = o2tools.ojn.OJN(input("Enter your OJN file: "))
+  with open(file_path, "rb") as f:
+      ojn_file = o2tools.ojn.OJN(f.read())
 
-Here, we ask the user for the path to the OJN file and open it. ``OJN()``'s only parameter is the file path, which is why we can feed the input directly into ``OJN()``.
+Here, we use the file path that the user specified earlier, and feed the bytes into the ``OJN()`` class.
 
 ====
 
@@ -70,18 +74,21 @@ Next, we need to change the property. We could go through a lot of if statements
 
   import o2tools
 
-  ojn_file = o2tools.ojn.OJN(input("Enter your OJN file: "))
-  new_property = input("Enter the name of the value you want to change: ")
-  new_value = input("Enter the new value: ")
-  print("Changing...")
+  file_path = input("Enter the path of your OJN file: ")
 
-  setattr(ojn_file.header, new_property, new_value)
+  with open(file_path, "rb") as f:
+      ojn_file = o2tools.ojn.OJN(f.read())
+      property = input("Enter the name of the value you want to change: ")
+      new_value = input("Enter the new value: ")
+      print("Changing...")
 
-  print("Changed!")
+      setattr(ojn_file.header, property, new_value)
+
+      print("Changed!")
 
 ====
 
-We only added one line, ``setattr(ojn_file.header, new_property, new_value)``. This line gets the attribute in ojn_file.header (``OjnHeader`` class) from a string (``new_property``), and sets the attribute to ``new_value``.
+We only added one line, ``setattr(ojn_file.header, property, new_value)``. This line gets the attribute in ojn_file.header (``OjnHeader`` class) from a string (``new_property``), and sets the attribute to ``new_value``.
 
 ====
 
@@ -89,7 +96,7 @@ To test if this is working, put this code below the ``setattr()`` function:
 
 .. code-block:: python
 
-  print(getattr(ojn_file.header, new_property))
+  print(getattr(ojn_file.header, property))
 
 ====
 
@@ -108,14 +115,12 @@ You should be seeing something like this in the console:
   33
   Changed!
 
-If you see this, good job! If you don't, make sure to read the previous code very carefully.
-
 Modifying the File
 ------------------
 
 To assemble everything into a file, you would usually need to make a new file (overwrite the file in this case) and start adding all of the header values and note data to it. Luckily, O2Tools already has a function for this, called ``make_file()``.
 
-You can either call ``o2tools.ojn.make_file()``, or ``o2tools.make_file()``. Both work the same, but because we are working with OJN files, we are going to use ``o2tools.ojn.make_file()``.
+You can call ``o2tools.ojn.make_file()`` with the proper parameters to reconstruct the OJN file.
 
 ====
 
@@ -124,34 +129,40 @@ Let's add this to the code:
 .. code-block:: python
 
   import o2tools
-    
-  ojn_file = o2tools.ojn.OJN(input("Enter your OJN file: "))
-  new_property = input("Enter the name of the value you want to change: ")
-  new_value = input("Enter the new value: ")
-  print("Changing...")
-    
-  setattr(ojn_file.header, new_property, new_value)
-  o2tools.ojn.make_file(ojn_file.ojn_file_path, ojn_file.header, ojn_file.note_data)
-    
-  print("Changed!")
 
+  file_path = input("Enter the path of your OJN file: ")
+
+  with open(file_path, "rb") as f:
+      ojn_file = o2tools.ojn.OJN(f.read())
+      property = input("Enter the name of the value you want to change: ")
+      new_value = input("Enter the new value: ")
+      print("Changing...")
+
+      setattr(ojn_file.header, property, new_value)
+      o2tools.ojn.make_file(file_path, ojn_file.header, ojn_file.note_data, ojn_file.cover, ojn_file.thumbnail)
+
+      print("Changed!")
 ====
 
 .. code-block:: python
 
-  o2tools.ojn.make_file(ojn_file.ojn_file_path, ojn_file.header, ojn_file.note_data)
+  o2tools.ojn.make_file(file_path, ojn_file.header, ojn_file.note_data, ojn_file.cover, ojn_file.thumbnail)
 
-This function makes a new file with the name in the first parameter (``ojn_file.ojn_file_path``, which is what the user specified in the first input statement).
+This function makes a new file with the following parameters:
 
-The header in the second parameter(``ojn_file.header``, as we changed the header directly).
-
-And the note data in the third parameter (``ojn_file.note_data``, we didnt do anything to the note data so it stays the same).
+* The file name in the first parameter: ``file_path``, which is what the user specified in the first input statement.
+* The header in the second parameter: ``ojn_file.header``.
+* The note data in the third parameter: ``ojn_file.note_data``.
+* The cover image in the fourth parameter: ``ojn_file.cover``.
+* And the thumbnail  in the fifth parameter: ``ojn_file.thumbnail``.
 
 ====
 
 Technically, you are done now!
 
-But we still need to add error checking, as the user can enter the wrong type, and it is impossible to type bytes.
+However, if you try to run this, entering a value for a property that requires anything but an integer will crash the program.
+
+So, let's add error checking, as the user can enter the wrong type, and it is impossible to type bytes.
 
 Error Checking
 --------------
@@ -161,24 +172,27 @@ Here is the full, complete code for this program:
 .. code-block:: python
 
   import o2tools
-  
-  ojn_file = o2tools.ojn.OJN(input("Enter your OJN file: "))
-  new_property = input("Enter the name of the value you want to change: ")
-  new_value = input("Enter the new value: ")
-  print("Changing...")
-  
-  try:
-      new_value = int(new_value)
-  except ValueError:
+
+  file_path = input("Enter the path of your OJN file: ")
+
+  with open(file_path, "rb") as f:
+      ojn_file = o2tools.ojn.OJN(f.read())
+      property = input("Enter the name of the value you want to change: ")
+      new_value = input("Enter the new value: ")
+      print("Changing...")
+
       try:
-          new_value = float(new_value)
+          new_value = int(new_value)
       except ValueError:
-          new_value = new_value.encode("ISO-8859-1")
-  
-  setattr(ojn_file.header, new_property, new_value)
-  o2tools.ojn.make_file(ojn_file.ojn_file_path, ojn_file.header, ojn_file.note_data)
-  
-  print("Changed!")
+          try:
+              new_value = float(new_value)
+          except ValueError:
+              new_value = new_value.encode("ISO-8859-1")
+
+      setattr(ojn_file.header, property, new_value)
+      o2tools.ojn.make_file(file_path, ojn_file.header, ojn_file.note_data, ojn_file.cover, ojn_file.thumbnail)
+
+      print("Changed!")
 
 ====
 
@@ -243,4 +257,6 @@ As you can tell, this can get pretty easy to learn, as the actual process of par
 
 If you want to learn more, you can go to the next tutorial, or check out the documentation for both the file formats and O2Tools.
 
-You can also download the python file here.
+You can also download the python file here: https://github.com/SweepSweep2/o2tools-docs/blob/main/docs/source/tutorials/1/code.py
+
+

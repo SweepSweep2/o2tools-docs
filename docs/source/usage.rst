@@ -37,7 +37,7 @@ Or, if you want only a certain file type in your code you can use something alon
    with open("o2ma200.ojm", "rb") as f:
        ojm_file = ojm.OJM(f.read())
 
-Below are some examples on how you would read certain data types.
+Below is an example on how you would read data types.
 
 OJN Files
 ---------
@@ -100,6 +100,6 @@ Continue
 
 You can follow tutorials on how to create O2Tools programs. Here are some that are good for beginners:
 
-- :doc:'tutorial1.rst'
-- tut2
-- tut3
+- `Tutorial 1 - OJN Header Changer <https://o2tools.readthedocs.io/en/latest/tutorial1.html>`_.
+- Tutorial 2 - OPA File Extractor (coming soon)
+- Tutorial 3 - Interface Editor (coming soon)
